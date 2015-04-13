@@ -2,7 +2,7 @@
     {{input type="text" id="new-todo" placeholder="What needs to be done?" value=newTitle action="createTodo"}}
     {{#each}}
         <li {{bind-attr class="isCompleted:completed"}}>
-            <input type="checkbox" class="toggle">
+            {{input type="checkbox" checked=isCompleted class="toggle"}}
             <label>{{title}}</label><button class="destroy"></button>
         </li>
     {{/each}}
