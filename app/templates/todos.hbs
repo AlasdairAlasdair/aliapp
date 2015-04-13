@@ -1,7 +1,10 @@
+{{input type="text" id="new-todo" placeholder="What needs to be done?" value=newTitle action="createTodo"}}
+ 
 <section id="main">
     {{outlet}}
     {{input type="checkbox" id="toggle-all" checked=allAreDone}}
 </section>
+ 
 <footer id="footer">
     <span id="todo-count">
         <strong>{{remaining}}</strong> {{inflection}} left

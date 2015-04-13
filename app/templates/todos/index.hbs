@@ -1,6 +1,6 @@
 <ul id="todo-list">
     {{#each itemController="todo"}}
-        <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>        
+        <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
             {{#if isEditing}}
                 {{input type="text" class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges"}}
             {{else}}
@@ -10,5 +10,4 @@
             {{/if}}
         </li>
     {{/each}}
-    {{input type="text" id="new-todo" placeholder="What needs to be done?" value=newTitle action="createTodo"}}
 </ul>
