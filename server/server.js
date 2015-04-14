@@ -13,7 +13,6 @@ mongoose.connect('mongodb://' + process.env.MONGODB_USERNAME + ':' + process.env
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use('/api/v1/', router);
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function (request, response) {
@@ -23,7 +22,7 @@ router.get('/', function (request, response) {
 // create a todo (accessed at POST http://localhost:8080/api/v1/todos)
 router.route('/todos')
   .post(function (request, response) {
-    // create a new instance of the Todo model        
+    // create a new instance of the Todo model
     var todo = new Todo();
     todo.title = request.body.title;
     todo.isCompleted = request.body.isCompleted;
@@ -45,5 +44,7 @@ router.route('/todos')
     });
   });
 
+// register routes with prefix
+app.use('/api/v1/', router);
 app.listen(port);
 console.log('Server running on port ' + port);
