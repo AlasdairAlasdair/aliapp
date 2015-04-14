@@ -24,8 +24,8 @@ router.route('/todos')
   .post(function (request, response) {
     // create a new instance of the Todo model
     var todo = new Todo();
-    todo.title = request.body.title;
-    todo.isCompleted = request.body.isCompleted;
+    todo.title = request.body.todo.title;
+    todo.isCompleted = request.body.todo.isCompleted;
 
     todo.save(function (error) {
       if (error) {
@@ -52,7 +52,7 @@ router.route('/todos/:todo_id')
             if (error) response.send(error);
             response.json(todo);
         });
-    });
+    })
 
     // update the todo with this id
     .put(function (request, response) {
@@ -62,8 +62,8 @@ router.route('/todos/:todo_id')
             if (error) response.send(error);
  
             // update the todo info
-            todo.title = request.body.title;
-            todo.isCompleted = request.body.isCompleted;
+            todo.title = request.body.todo.title;
+            todo.isCompleted = request.body.todo.isCompleted;
             
             // save the todo
             todo.save(function(error) {
@@ -78,7 +78,7 @@ router.route('/todos/:todo_id')
         Todo.remove({
             _id: request.params.todo_id
         }, function(error, todo) {
-            if (error) res.send(err);
+            if (error) response.send(error);
  
             response.json({ message: 'Successfully deleted' });
         });
