@@ -44,6 +44,46 @@ router.route('/todos')
     });
   });
 
+router.route('/todos/:todo_id')
+    
+    // get todo by id
+    .get(function (request, response) {
+        Todo.findById(request.params.todo_id, function (error, todo) {
+            if (error) response.send(error);
+            response.json(todo);
+        });
+    });
+
+    // update the todo with this id
+    .put(function (request, response) {
+ 
+        // use our todo model to find the todo we want
+        Todo.findById(request.params.todo_id, function(error, todo) {
+            if (error) response.send(error);
+ 
+            // update the todo info
+            todo.title = request.body.title;
+            todo.isCompleted = request.body.isCompleted;
+            
+            // save the todo
+            todo.save(function(error) {
+                if (error) response.send(error);
+                response.json({ message: 'Todo updated!' });
+            });
+        });
+    })
+    
+    // delete the todo with this id
+    .delete(function (request, response) {
+        Todo.remove({
+            _id: request.params.todo_id
+        }, function(error, todo) {
+            if (error) res.send(err);
+ 
+            response.json({ message: 'Successfully deleted' });
+        });
+    });
+
 // register routes with prefix
 app.use('/api/v1/', router);
 app.listen(port);
