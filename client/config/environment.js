@@ -1,7 +1,12 @@
 /* jshint node: true */
 
 module.exports = function(environment) {
+  // var server = process.env.NODE_SERVER || "http://localhost:8080"
   var ENV = {
+    contentSecurityPolicy: {
+      'style-src': "'self' 'unsafe-inline'",
+      'connect-src': "'self' http://localhost:8080"
+    },
     modulePrefix: 'aliapp',
     environment: environment,
     baseURL: '/',

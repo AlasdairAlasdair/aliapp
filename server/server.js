@@ -14,6 +14,15 @@ mongoose.connect('mongodb://' + process.env.MONGODB_USERNAME + ':' + process.env
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Add CORS headers
+app.use(function (request, response, next) {
+    response.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    response.header("Access-Control-Allow-Resource", "*");
+    response.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    next();
+});
+
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function (request, response) {
   response.json({ message: 'hello there'});
