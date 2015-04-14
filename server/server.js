@@ -49,7 +49,9 @@ router.route('/todos')
       if (error) {
         response.send(error);
       }
-      response.json(todos);
+      response.json({
+                todos: todos
+            });
     });
   });
 
@@ -58,8 +60,12 @@ router.route('/todos/:todo_id')
     // get todo by id
     .get(function (request, response) {
         Todo.findById(request.params.todo_id, function (error, todo) {
-            if (error) response.send(error);
-            response.json(todo);
+            if (error) {
+              response.send(error);
+            }
+            response.json({
+                todo: todo
+            });
         });
     })
 
